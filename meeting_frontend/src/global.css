@@ -1,15 +1,29 @@
 /**
- * WHAT IS THIS FILE?
- *
- * Globally applied styles for the ultralight Qwik template.
- * Uses a minimalistic light theme with specified color scheme.
+ * Global styles for Ocean Professional theme.
+ * Modern dashboard aesthetic with subtle shadows, rounded corners, and smooth transitions.
  */
 
 :root {
-  --primary-color: #000000;
-  --secondary-color: #333333;
-  --accent-color: #0078d4;
-  --background-color: #ffffff;
+  --ocean-primary: #2563EB;
+  --ocean-secondary: #F59E0B;
+  --ocean-error: #EF4444;
+  --ocean-bg: #f9fafb;
+  --ocean-surface: #ffffff;
+  --ocean-text: #111827;
+  --ocean-muted: #6b7280;
+  --ocean-border: #e5e7eb;
+  --ocean-ring: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  --ocean-shadow: 0 10px 15px -3px rgba(17, 24, 39, 0.08), 0 4px 6px -4px rgba(17, 24, 39, 0.06);
+  --ocean-radius: 12px;
+  --ocean-radius-sm: 10px;
+  --ocean-radius-lg: 16px;
+  --ocean-transition: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
@@ -31,11 +45,248 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
-  color: var(--primary-color);
-  line-height: inherit;
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.06), rgba(243, 244, 246, 0.25)) fixed,
+    var(--ocean-bg);
+  color: var(--ocean-text);
+  min-height: 100vh;
 }
 
-* {
-  box-sizing: border-box;
+a {
+  color: var(--ocean-primary);
+  text-decoration: none;
+  transition: color var(--ocean-transition);
+}
+a:hover { color: #1d4ed8; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font: inherit;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Utility classes */
+.card {
+  background: var(--ocean-surface);
+  border: 1px solid var(--ocean-border);
+  border-radius: var(--ocean-radius);
+  box-shadow: var(--ocean-shadow);
+}
+
+.shadow-soft {
+  box-shadow: var(--ocean-shadow);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  transition: all var(--ocean-transition);
+  background: var(--ocean-primary);
+  color: white;
+}
+.btn:hover {
+  filter: brightness(0.95);
+  box-shadow: var(--ocean-ring);
+}
+.btn.secondary {
+  background: var(--ocean-secondary);
+  color: #111827;
+}
+.btn.ghost {
+  background: white;
+  color: var(--ocean-text);
+  border-color: var(--ocean-border);
+}
+.btn.ghost:hover {
+  border-color: var(--ocean-primary);
+  color: var(--ocean-primary);
+  box-shadow: var(--ocean-ring);
+}
+.btn.error {
+  background: var(--ocean-error);
+  color: white;
+}
+
+.input, .select, .textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--ocean-border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ocean-text);
+  transition: border-color var(--ocean-transition), box-shadow var(--ocean-transition);
+}
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--ocean-primary);
+  box-shadow: var(--ocean-ring);
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  color: var(--ocean-text);
+  margin-bottom: 6px;
+}
+
+.helper {
+  font-size: 12px;
+  color: var(--ocean-muted);
+}
+
+/* Layout */
+.app-shell {
+  display: grid;
+  grid-template-rows: 64px 1fr;
+  grid-template-columns: 260px 1fr;
+  grid-template-areas:
+    "nav nav"
+    "sidebar main";
+  min-height: 100vh;
+}
+
+.navbar {
+  grid-area: nav;
+  backdrop-filter: saturate(140%) blur(6px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.5));
+  border-bottom: 1px solid var(--ocean-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 18px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--ocean-text);
+}
+.brand-badge {
+  height: 36px;
+  width: 36px;
+  border-radius: 10px;
+  background: radial-gradient(80% 80% at 70% 30%, rgba(37,99,235,0.3), transparent),
+    linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(245, 158, 11, 0.15));
+  border: 1px solid var(--ocean-border);
+  display: grid;
+  place-items: center;
+  color: var(--ocean-primary);
+}
+
+.sidebar {
+  grid-area: sidebar;
+  padding: 16px;
+  border-right: 1px solid var(--ocean-border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(249,250,251,0.6));
+}
+
+.main {
+  grid-area: main;
+  padding: 18px;
+}
+
+.section-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ocean-muted);
+  margin: 10px 0 8px;
+}
+
+.nav-group {
+  margin-bottom: 18px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  color: var(--ocean-text);
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all var(--ocean-transition);
+}
+.nav-item:hover {
+  background: #fff;
+  border-color: var(--ocean-border);
+  box-shadow: var(--ocean-shadow);
+}
+
+.meeting-list {
+  display: grid;
+  gap: 12px;
+}
+
+.meeting-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--ocean-radius);
+  border: 1px solid var(--ocean-border);
+  background: #fff;
+  transition: box-shadow var(--ocean-transition), transform var(--ocean-transition), border-color var(--ocean-transition);
+}
+.meeting-card:hover {
+  box-shadow: var(--ocean-shadow);
+  transform: translateY(-1px);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+.meeting-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: var(--ocean-muted);
+  font-size: 14px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--ocean-primary);
+  border: 1px solid rgba(37,99,235,0.15);
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: 64px auto 1fr;
+    grid-template-areas:
+      "nav"
+      "sidebar"
+      "main";
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar-inner { padding: 0 12px; }
+  .sidebar { padding: 12px; }
+  .main { padding: 12px; }
 }
